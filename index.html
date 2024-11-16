@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простой сайт</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="script.js"></script>
+	<!-- Подключаем библиотеку для работы с камерой -->
+	<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+
+
+</head>
+	<body>
+		<!-- Нижняя панель навигации -->
+
+
+	<!-- Экран 1: три поля ввода -->
+	<div id="screen1" class="screen">
+		<h1>Экран 1</h1>
+		<input type="text" placeholder="Поле 1" id="input1">
+		<input type="text" placeholder="Поле 2" id="input2">
+		<input type="text" placeholder="Поле 3" id="input3">
+	</div>
+
+	<!-- Экран 2: кнопка для истории сканирований -->
+	<div id="screen2" class="screen">
+		<h1>Экран 2</h1>
+		<button id="historyBtn">История сканирования</button>
+	</div>
+
+	<!-- Экран 3: Разметка для камеры и области сканирования -->
+	<div id="screen3" class="screen">
+		<div id="scanner-container" style="position: relative;">
+			<div id="qr-reader" style="width: 100%; height: 100%;"></div>
+			<div class="scanner-box"></div> <!-- Квадрат для сканирования -->
+		</div>
+	</div>
+
+
+	<!-- Экран 4: кнопка для перехода на экран 5 -->
+	<!-- Экран 4: добавим поле ввода для текста -->
+	<div id="screen4" class="screen">
+		<h1>Экран 4 - Сканер</h1>
+		<p>Здесь будет работать сканер QR-кодов.</p>
+		<input type="text" id="inputScreen4" placeholder="Введите текст" />
+		<button id="goToScreen5">Перейти на экран 5</button>
+	</div>
+
+
+	<!-- Экран 5: отображаем данные из полей -->
+	<div id="screen5" class="screen">
+		<h1>Экран 5</h1>
+		<p>Здесь отображаются данные из полей экрана 1 и экрана 4:</p>
+		<p>Поле 1: <span id="field1Value"></span></p>
+		<p>Поле 2: <span id="field2Value"></span></p>
+		<p>Поле 3: <span id="field3Value"></span></p>
+		<p>Поле 4 (Экран 4): <span id="field4Value"></span></p>
+		<button id="goToScreen6">Перейти на экран 6</button>
+	</div>
+
+	<!-- Экран 6: добавим кнопку перехода на экран 7 -->
+	<div id="screen6" class="screen">
+		<h1>Экран 6</h1>
+		<p>Данные из поля ввода с экрана 4:</p>
+		<p>Поле ввода 4: <span id="fieldScreen4"></span></p>
+		<button id="goToScreen1From6">Перейти на главный экран</button>
+		<button id="goToScreen7">Перейти на экран 7</button>
+	</div>
+
+	<!-- Экран 7: добавим кнопку перехода на экран 8 -->
+	<div id="screen7" class="screen">
+		<h1>Экран 7</h1>
+		<p>Поле 1 (Экран 1): <span id="field1Value7"></span></p>
+		<p>Поле 2 (Экран 1): <span id="field2Value7"></span></p>
+		<p>Поле 3 (Экран 1): <span id="field3Value7"></span></p>
+		<p>Поле 4 (Экран 4): <span id="fieldScreen4Value7"></span></p>
+		<button id="goToScreen8">Перейти на экран 8</button>
+	</div>
+
+	<!-- Экран 8: добавим кнопку перехода на экран 9 -->
+	<div id="screen8" class="screen">
+		<h1>Экран 8</h1>
+		<p>Поле 1 (Экран 1): <span id="field1Value8"></span></p>
+		<p>Поле 2 (Экран 1): <span id="field2Value8"></span></p>
+		<p>Поле 3 (Экран 1): <span id="field3Value8"></span></p>
+		<p>Поле 4 (Экран 4): <span id="fieldScreen4Value8"></span></p>
+		<!-- Экран 8: кнопка перехода на главный экран -->
+		<button id="goToScreen1From8Btn">Перейти на главный экран</button>
+	</div>
+
+		
+    <!-- Экран 10 -->
+    <div id="screen10" class="screen">
+		<h1>Экран 10 - История сканирования</h1>
+		<p>Здесь будет отображаться история сканирования.</p>
+	</div>
+	
+	<div id="bottom-nav">
+
+		<button data-screen="screen1">Экран 1</button>
+		<button data-screen="screen2">Экран 2</button>
+		<button data-screen="screen3">Экран 3</button>
+		<button data-screen="screen0">Экран 0</button>
+		<button data-screen="screen00">Экран 00</button>
+	</div>
+
+</body>
+</html>

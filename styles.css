@@ -1,0 +1,87 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Нижняя панель навигации */
+#bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+#bottom-nav button {
+    background: none;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#bottom-nav button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Экраны */
+.screen {
+    display: none; /* Все экраны скрыты по умолчанию */
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Активный экран */
+.screen.active {
+    display: flex; /* Показываем только активный экран */
+}
+
+.screen h1 {
+    margin-bottom: 20px;
+}
+
+.screen input,
+.screen button {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+}
+
+.screen button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.screen button:hover {
+    background-color: #0056b3;
+}
+/* Стили для квадрата сканирования */
+.scanner-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #00ff00;
+    width: 80vw;
+    height: 80vw;
+    pointer-events: none;
+    z-index: 10;
+}

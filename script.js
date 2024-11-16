@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const screens = document.querySelectorAll('.screen');
-    const navButtons = document.querySelectorAll('#bottom-nav button');
+    const navButtons = document.querySelectorAll('#bottom-nav button:not([data-screen="screen0"]):not([data-screen="screen00"])');
     const historyBtn = document.getElementById('historyBtn');
     const scanBtn = document.querySelector('button[data-screen="screen3"]'); // Поиск кнопки по атрибуту data-screen
     const goToScreen5Btn = document.getElementById('goToScreen5');

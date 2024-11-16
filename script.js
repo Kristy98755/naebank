@@ -126,35 +126,39 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`Найдено кнопок навигации: ${navButtons.length}`);
 
     // Функция для инициализации сканера
-    function startScanner() {
-        const qrReader = new Html5Qrcode("qr-reader");
+    // Функция для инициализации сканера
+	function startScanner() {
+		const qrReader = new Html5Qrcode("qr-reader");
 
-        const config = {
-            fps: 20,  // Частота кадров
-            qrbox: { width: 250, height: 250 }  // Размер квадрата для сканирования
-        };
+		const config = {
+			fps: 10,  // Частота кадров
+			qrbox: { width: 250, height: 250 }  // Размер квадрата для сканирования
+		};
 
-        qrReader.start(
-            { facingMode: "environment" },  // Камера устройства
-            config,
-            (decodedText, decodedResult) => {
-                console.log("QR Code detected: ", decodedText);
-                alert(`QR Code detected: ${decodedText}`);
-                showScreen('screen4');  // Переход на экран 4 после сканирования
-            },
-            (errorMessage) => {
-                console.error(errorMessage);  // Обработка ошибок
-            }
-        );
-    }
+		qrReader.start(
+			{ facingMode: "environment" },  // Камера устройства
+			config,
+			(decodedText, decodedResult) => {
+				console.log("QR Code detected: ", decodedText);
+				alert(`QR Code detected: ${decodedText}`);
+				showScreen('screen4');  // Переход на экран 4 после сканирования
+			},
+			(errorMessage) => {
+				console.error("Ошибка сканирования:", errorMessage);  // Обработка ошибок
+			}
+		).catch(err => {
+			console.error("Ошибка запуска сканера:", err);
+			alert("Не удалось запустить сканер. Проверьте доступ к камере.");
+		});
+	}
 
-    // Инициализация экрана 3
-    if (scanBtn) {
-        scanBtn.addEventListener('click', () => {
-            showScreen('screen3');
-        });
-    }
+	// Инициализация экрана 3
+	if (scanBtn) {
+		scanBtn.addEventListener('click', () => {
+			console.log('Запуск экрана сканера');
+			showScreen('screen3');
+			startScanner(); // Запуск сканера при открытии экрана 3
+		});
+	}
 
-    // Установка начального экрана
-    showScreen('screen1');
 });

@@ -8,6 +8,23 @@ body {
     height: 100vh;
 }
 
+  #qr-reader {
+    position: relative;
+    width: 100vw; /* Полная ширина окна */
+    height: 100vh; /* Полная высота окна */
+    overflow: hidden; /* Скрывает выходящие части */
+  }
+  
+#qr-reader video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Высота на весь экран */
+    width: auto;    /* Пропорциональная ширина */
+    object-fit: cover; /* Заполняет контейнер, обрезая лишнее */
+  }
+
+
 /* Нижняя панель навигации */
 #bottom-nav {
     display: flex;

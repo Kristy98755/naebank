@@ -8,6 +8,14 @@ body {
     height: 100vh;
 }
 
+#scanResult {
+    width: 80vw;  /* Ширина 80% от ширины экрана */
+    word-wrap: break-word;  /* Включаем автоперенос слов */
+    overflow-wrap: break-word;  /* Для лучшей совместимости */
+    white-space: normal;  /* Разрешаем перенос строк */
+    margin: 0 auto;  /* Центрируем элемент */
+}
+
   #qr-reader {
     position: relative;
     width: 100vw; /* Полная ширина окна */

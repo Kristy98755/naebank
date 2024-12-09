@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			config,
 			(decodedText, decodedResult) => {
 				console.log("QR Code detected: ", decodedText);
+				const scanResultElement = document.getElementById("scanResult");
+				if (scanResultElement) {
+					scanResultElement.textContent = decodedText;  // Меняем текст на результат сканирования
+				}
 				showScreen('screen4');  // Переход на экран 4 после сканирования
 			},
 			(errorMessage) => {

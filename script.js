@@ -127,33 +127,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для инициализации сканера
     // Функция для инициализации сканера
-	function startScanner() {
-		const qrReader = new Html5Qrcode("qr-reader");
+	// Функция для инициализации сканера
+function startScanner() {
+    const qrReader = new Html5Qrcode("qr-reader");
 
-		const config = {
-			fps: 10,  // Частота кадров
-			qrbox: { width: 250, height: 250 }  // Размер квадрата для сканирования
-		};
+    const config = {
+        fps: 10,  // Частота кадров
+        qrbox: { width: 250, height: 250 }  // Размер квадрата для сканирования
+    };
 
-		qrReader.start(
-			{ facingMode: "environment" },  // Камера устройства
-			config,
-			(decodedText, decodedResult) => {
-				console.log("QR Code detected: ", decodedText);
-				const scanResultElement = document.getElementById("scanResult");
-				if (scanResultElement) {
-					scanResultElement.textContent = decodedText;  // Меняем текст на результат сканирования
-				}
-				showScreen('screen4');  // Переход на экран 4 после сканирования
-			},
-			(errorMessage) => {
-				console.error("Ошибка сканирования:", errorMessage);  // Обработка ошибок
-			}
-		).catch(err => {
-			console.error("Ошибка запуска сканера:", err);
-			alert("Не удалось запустить сканер. Проверьте доступ к камере.");
-		});
-	}
+    qrReader.start(
+        { facingMode: "environment" },  // Камера устройства
+        config,
+        (decodedText, decodedResult) => {
+            console.log("QR Code detected: ", decodedText);
+
+            // Здесь разбиваем и декодируем данные QR-кода
+            const qrParts = decodedText.split('#'); // разделяем по #, где часть после # - это данные
+            const serviceAndRekvizit = qrParts[1].split('Simbank');  // Пример разделения на услугу и реквизит
+            const service = decodeURIComponent(serviceAndRekvizit[0]);
+            const rekvizit = serviceAndRekvizit[1];
+
+            // Получаем элементы на экране 4
+            const input1Value = document.getElementById('input1').value;
+            const input2Value = document.getElementById('input2').value;
+
+            // Находим элемент на экране 4 для вывода результатов
+            const screen4Output = document.getElementById('screen4Output');
+            if (screen4Output) {
+                // Формируем строку для отображения на экране 4
+                screen4Output.innerHTML = `
+                    <p>Поле 1: ${input1Value}</p>
+                    <p>Поле 2: ${input2Value}</p>
+                    <p>Услуга: ${service}</p>
+                    <p>Реквизит: ${rekvizit}</p>
+                `;
+            }
+
+            // Переходим на экран 4 после сканирования
+            showScreen('screen4'); 
+        },
+        (errorMessage) => {
+            console.error("Ошибка сканирования:", errorMessage);  // Обработка ошибок
+        }
+    ).catch(err => {
+        console.error("Ошибка запуска сканера:", err);
+        alert("Не удалось запустить сканер. Проверьте доступ к камере.");
+    });
+}
+
 
 	// Инициализация экрана 3
 	if (scanBtn) {

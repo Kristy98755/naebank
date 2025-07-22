@@ -1,65 +1,32 @@
 function parseQRCode(decodedText) {
-    // Декодирование текста из процентного формата
     decodedText = decodeURIComponent(decodedText);
 
     const result = {
-        услуга: '',
+        услуга: 'Tulpar',
         реквизит: '',
-        получатель: null // null, если получатель не нужен
+        получатель: ''
     };
 
-    // Логирование текста QR, чтобы убедиться, что строка правильно передается
     console.log("Декодированный текст QR: ", decodedText);
 
-    const parts = decodedText.split('#');
-    if (parts.length < 2) {
-        console.log("QR код не содержит ожидаемого формата данных.");
-        return result;
-    }
+    const keyword = "qr.tulpar.kg10";
+    const index = decodedText.indexOf(keyword);
 
-    const dataPart = parts[1];
+    if (index !== -1 && decodedText.length >= index + keyword.length + 6) {
+        const segment = decodedText.substring(index + keyword.length, index + keyword.length + 6);
+        const prefix = segment.substring(0, 2);
 
-    const mbankPattern = /mbank\.kg/i;
-    const simbankPattern = /Simbank/i;
-
-    if (mbankPattern.test(decodedText)) {
-        console.log("Обнаружен mBank");
-        result.услуга = 'MBANK';
-
-        const rekvizitMatch = dataPart.match(/996\d{9}/);
-        result.реквизит = rekvizitMatch ? rekvizitMatch[0] : '';
-        console.log("Реквизит найден:", result.реквизит);
-
-        // Новый процесс для извлечения получателя
-        let receiverString = '';
-        // Извлекаем все кириллические символы, точки и пробелы
-        for (let i = 0; i < decodedText.length; i++) {
-            const char = decodedText[i];
-            if (/[а-яА-ЯёЁ.\s]/.test(char)) {
-                receiverString += char;
-            }
+        if (prefix === "03") {
+            result.реквизит = segment.substring(2, 5); // 3 цифры
+        } else if (prefix === "04") {
+            result.реквизит = segment.substring(2, 6); // 4 цифры
+        } else {
+            console.log("Неизвестный префикс: ", prefix);
         }
 
-        // Удаляем точки в начале строки
-        while (receiverString.startsWith('.')) {
-            receiverString = receiverString.substring(1);
-        }
-
-        // Усекаем строку ровно посередине
-        const midIndex = Math.floor(receiverString.length / 2);
-        receiverString = receiverString.substring(0, midIndex - 1);
-
-        // Получатель теперь будет содержать усеченную строку
-        result.получатель = receiverString.trim();
-        console.log("Получатель найден:", result.получатель);
-    } else if (simbankPattern.test(decodedText)) {
-        console.log("Обнаружен Simbank");
-        result.услуга = 'Simbank';
-        const rekvizitMatch = dataPart.match(/996\d{9}/);
-        result.реквизит = rekvizitMatch ? rekvizitMatch[0] : '';
-        result.получатель = null; // Для Simbank получатель не нужен
+        console.log("Номер транспорта: ", result.реквизит);
     } else {
-        console.log("mBank или Simbank не найдены в QR");
+        console.log("Сигнатура qr.tulpar.kg10 не найдена или данных недостаточно.");
     }
 
     return result;

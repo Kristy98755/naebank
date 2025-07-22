@@ -8,58 +8,6 @@ body {
     height: 100vh;
 }
 
-#scanResult {
-    width: 80vw;  /* Ширина 80% от ширины экрана */
-    word-wrap: break-word;  /* Включаем автоперенос слов */
-    overflow-wrap: break-word;  /* Для лучшей совместимости */
-    white-space: normal;  /* Разрешаем перенос строк */
-    margin: 0 auto;  /* Центрируем элемент */
-}
-
-  #qr-reader {
-    position: relative;
-    width: 100vw; /* Полная ширина окна */
-    height: 100vh; /* Полная высота окна */
-    overflow: hidden; /* Скрывает выходящие части */
-  }
-  
-#qr-reader video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh; /* Высота на весь экран */
-    width: auto;    /* Пропорциональная ширина */
-    object-fit: cover; /* Заполняет контейнер, обрезая лишнее */
-  }
-
-
-/* Нижняя панель навигации */
-#bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-}
-
-#bottom-nav button {
-    background: none;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-#bottom-nav button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
 /* Экраны */
 .screen {
     display: none; /* Все экраны скрыты по умолчанию */
@@ -70,7 +18,6 @@ body {
     padding: 20px;
 }
 
-/* Активный экран */
 .screen.active {
     display: flex; /* Показываем только активный экран */
 }
@@ -98,8 +45,45 @@ body {
 .screen button:hover {
     background-color: #0056b3;
 }
-/* Стили для квадрата сканирования */
 
-#screen3 {
-  padding: 0px 20px; /* Уникальный стиль только для screen3 */
+/* Экран 0 (стартовый с фоном) */
+#screen0 {
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin: 0;
+}
+
+#screen0 img {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Сканер */
+#qr-reader {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#qr-reader video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: auto;
+    object-fit: cover;
+}
+
+/* #bottom-nav — удалён */
+
+/* Уникальный стиль для screen3 */
+#screen1 {
+    padding: 0px 20px;
 }

@@ -21,7 +21,7 @@ function parseQRCode(decodedText) {
         console.log("Номер транспорта: ", transportNumber);
 
         const el = document.getElementById("auto");
-        if (el) el.textContent = transportNumber;
+        if (el) el.textContent = transportNumber + "/" + transportNumber;
 
     } else {
         console.log("Сигнатура qr.tulpar.kg10 не найдена или данных недостаточно.");

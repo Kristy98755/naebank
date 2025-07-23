@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-	font-size: 92%;
+	font-size: 97%;
 	font-weight: 520;
 }
 
@@ -132,14 +132,14 @@ body {
 }
 .success-image {
     margin-top: 25px;
-    width: 100%;
+    width: 98%;
     height: auto;
     object-fit: contain;
 }
 
 .dashed-line {
-    margin: 0px 20px 0 20px; /* Отступы сверху и по бокам */
-    font-size: 94%; /* Можно подстроить */
+    margin: 0px 20px; /* Отступы сверху и по бокам */
+    font-size: 97%; /* Можно подстроить */
     color: #262626;
     letter-spacing: 5px; /* Распределяет символы по ширине */
     user-select: none; /* Чтобы нельзя было выделить */
@@ -150,7 +150,7 @@ body {
 
 .custom-table {
   margin-top: 20px;
-  width: calc(100% - 30px);
+  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   background: transparent;
@@ -161,7 +161,7 @@ body {
   width: 50%;
   word-wrap: break-word;
   white-space: normal;
-  padding: 0;
+  padding: 0 20px;
   padding-bottom: 12px;
   background: transparent;
   border: none;

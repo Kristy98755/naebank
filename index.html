@@ -8,6 +8,12 @@
     <script src="script.js"></script>
     <script src="parseQRCode.js"></script>
     <script src="html5-qrcode.min.js"></script>
+	<script src="generate-number.js"></script>
+
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -25,9 +31,23 @@
 
     <!-- Экран 2 (ранее screen4): результат -->
     <div id="screen2" class="screen">
-        <h2>Результаты сканирования</h2>
-        <div id="screen4Output"></div>
-        <input id="inputScreen4" type="text" placeholder="Введите данные" />
+		<img src="history.jpg" alt="Фон истории" class="screen2-bg">
+	    <div class="history-box">
+		<!-- сюда можно вставить текст, кнопки и т.п. -->
+			<img src="success.png" alt="Успешно" class="success-image">
+			<p class="dashed-line">– – – – – – – – – – – – – – – –</p>
+			<table class="custom-table">
+			  <tbody>
+				<tr><td>Имя получателя</td><td>ОПЛАТА ПО ЕДИНОМУ QR (КЭШАУТ) МПЦ</td></tr>
+				<tr><td>Оплачено со счета</td><td id=billnum></td></tr>
+				<tr><td>Дата операции</td><td id=datetime></td></tr>
+				<tr><td>Номер квитанции</td><td id=receipt></td></tr>
+				<tr><td>Поставщик услуги</td><td>qr.tulpar.kg</td></tr>
+			  </tbody>
+			</table>
+			<p class="dashed-line">– – – – – – – – – – – – – – – –</p>
+			<p class="final">Оплата услуг. Получатель: Оплата по QR Госуслуги. <span id=auto></span>/<span id=auto></span>/TULPAR/17.00 <span id=hexid></span> Сумма 17.00 KGS</p>	
+		</div>
     </div>
 
 </body>

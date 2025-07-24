@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-	font-size: 97%;
+	font-size: 94%;
 	font-weight: 520;
 }
 
@@ -137,16 +137,30 @@ body {
     object-fit: contain;
 }
 
-.dashed-line {
-    margin: 0px 20px; /* Отступы сверху и по бокам */
-    font-size: 97%; /* Можно подстроить */
-    color: #262626;
-    letter-spacing: 5px; /* Распределяет символы по ширине */
-    user-select: none; /* Чтобы нельзя было выделить */
-    text-align: center;
-    line-height: 1;
-	font-family: Arial;
+.dotted-line {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 30px); /* отступы по 15px */
+    margin: 0;
+    height: 1px; /* Базовая высота */
+    position: relative;
 }
+
+.dotted-line::before,
+.dotted-line::after {
+    content: "";
+    flex-shrink: 0;
+}
+
+.dotted-line div {
+    width: calc(100% / 32);
+    height: 1px;
+    background-color: #606060;
+    transform: scaleY(0.6);           /* <== основная магия */
+    transform-origin: center top;     /* или 'center' если нужно вертикальное выравнивание */
+}
+
+
 
 .custom-table {
   margin-top: 20px;

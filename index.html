@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Простой сайт</title>
+    <title>NAEbank</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <script src="parseQRCode.js"></script>
@@ -45,7 +45,12 @@
 			<table class="custom-table">
 			  <tbody>
 				<tr><td>Имя получателя</td><td>ОПЛАТА ПО ЕДИНОМУ QR (КЭШАУТ) МПЦ</td></tr>
-				<tr><td>Оплачено со счета</td><td id=billnum></td></tr>
+				<tr><td>Оплачено со счета</td><td id=billnum style="
+																  overflow: visible;
+																  white-space: nowrap;
+																  direction: rtl;
+																  text-align: left;
+																"></td></tr>
 				<tr><td>Дата операции</td><td id=datetime></td></tr>
 				<tr><td>Номер квитанции</td><td id=receipt></td></tr>
 				<tr><td>Поставщик услуги</td><td>qr.tulpar.kg</td></tr>

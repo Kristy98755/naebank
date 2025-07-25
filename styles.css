@@ -27,26 +27,6 @@ body {
     margin-bottom: 20px;
 }
 
-.screen input,
-.screen button {
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 16px;
-    width: 80%;
-}
-
-.screen button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.screen button:hover {
-    background-color: #0056b3;
-}
-
 /* Экран 0 (стартовый с фоном) */
 #screen0 {
     background-color: black;
@@ -190,6 +170,7 @@ body {
   color: #a1a1a1;
   text-align: right;   /* Правый столбец - по правому краю */
 }
+
 
 .final {
 	text-align: left;

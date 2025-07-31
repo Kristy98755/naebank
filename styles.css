@@ -23,9 +23,6 @@ body {
     display: flex; /* Показываем только активный экран */
 }
 
-.screen h1 {
-    margin-bottom: 20px;
-}
 
 /* Экран 0 (стартовый с фоном) */
 #screen0 {

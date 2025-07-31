@@ -1,6 +1,8 @@
-document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initPage); //ждет пока загрузится страница
 
-function initPage() {
+function initPage() { //функция которая сама ничего не делает но запускает все функции
+
+// здесь перечислены остальные функции, список можно в любой момент пополнять
   generateBillNumber();
   updateDateTime();
   generateReceiptNumber();
@@ -13,8 +15,8 @@ function generateBillNumber() {
   for (let i = 0; i < 13; i++) {
     str += Math.floor(Math.random() * 10);
   }
-  const el = document.getElementById("billnum");
-  if (el) el.textContent = str;
+  const el = document.getElementById("billnum");  //ищем в файле html первую попавшуюся вещь которой дали ID "billnum"
+  if (el) el.textContent = str;					  //если таковая есть то присвоим ей сгенерированное значение
 }
 
 // Генерация текущей даты и времени в формате "дд.мм.гггг, чч:мм"

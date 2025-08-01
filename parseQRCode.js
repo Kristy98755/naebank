@@ -43,16 +43,17 @@ function parseQRCode(decodedText) {
     }
 
     
-    // ==== Дополнительный парсинг EMVCo QR (O!Деньги, Simbank, Mbank) ====
-    (function() {
+     (function () {
         const emvFields = {};
         let p = 0;
-        while (p < decodedText.length - 4) {
-            const t = decodedText.slice(p, p + 2);
-            const l = parseInt(decodedText.slice(p + 2, p + 4), 10);
-            const v = decodedText.slice(p + 4, p + 4 + l);
-            emvFields[t] = v;
-            p += 4 + l;
+
+        // Первый уровень TLV-парсинга
+        while (p <= decodedText.length - 4) {
+            const tag = decodedText.slice(p, p + 2);
+            const len = parseInt(decodedText.slice(p + 2, p + 4), 10);
+            const val = decodedText.slice(p + 4, p + 4 + len);
+            emvFields[tag] = val;
+            p += 4 + len;
         }
 
         const emvResult = {
@@ -64,30 +65,48 @@ function parseQRCode(decodedText) {
             сумма: null
         };
 
-        const merchantTags = Object.keys(emvFields).filter(t => +t >= 26 && +t <= 51);
-        for (const t of merchantTags) {
-            const sub = {};
+        // Парсим подструктуру в тегах от 26 до 51
+        for (const tag of Object.keys(emvFields)) {
+            const tagNum = parseInt(tag, 10);
+            if (tagNum < 26 || tagNum > 51) continue;
+
+            const subfields = {};
             let q = 0;
-            const val = emvFields[t];
-            while (q < val.length - 4) {
-                const st = val.slice(q, q + 2);
-                const sl = parseInt(val.slice(q + 2, q + 4), 10);
-                const sv = val.slice(q + 4, q + 4 + sl);
-                sub[st] = sv;
-                q += 4 + sl;
+            const val = emvFields[tag];
+
+            // Второй уровень TLV-парсинга
+            while (q <= val.length - 4) {
+                const subTag = val.slice(q, q + 2);
+                const subLen = parseInt(val.slice(q + 2, q + 4), 10);
+                const subVal = val.slice(q + 4, q + 4 + subLen);
+                subfields[subTag] = subVal;
+                q += 4 + subLen;
             }
-            if (sub["00"]) emvResult.поставщик = sub["00"];
-            if (sub["11"]) emvResult.реквизит = sub["11"];
-            if (sub["12"]) emvResult.получатель = sub["12"];
-            if (sub["26"]) emvResult.комментарий = sub["26"];
+
+            if (subfields["00"]) emvResult.поставщик = subfields["00"];
+            if (subfields["11"]) emvResult.реквизит = subfields["11"];
+            if (subfields["12"]) emvResult.получатель = subfields["12"];
+            if (subfields["26"]) emvResult.комментарий = subfields["26"];
         }
 
-        if (emvFields["59"] && !emvResult.получатель) emvResult.получатель = emvFields["59"];
-        if (emvFields["40"] && !emvResult.получатель) emvResult.получатель = emvFields["40"];
-        if (emvFields["54"]) emvResult.сумма = parseFloat(emvFields["54"]) / 100;
-        if (!emvResult.комментарий) emvResult.комментарий = emvResult.получатель;
+        // Альтернативные источники для получателя
+        if (!emvResult.получатель) {
+            emvResult.получатель = emvFields["59"] || emvFields["40"] || null;
+        }
+
+        // Сумма — строго по тегу 54, если есть
+        if ("54" in emvFields) {
+            const sumRaw = emvFields["54"];
+            if (/^\d+(\.\d+)?$/.test(sumRaw)) {
+                emvResult.сумма = parseFloat(sumRaw);
+            }
+        }
+
+        // Если комментарий не найден — подставим имя получателя
+        if (!emvResult.комментарий) {
+            emvResult.комментарий = emvResult.получатель;
+        }
 
         console.log("Парсинг EMVCo QR:", emvResult);
     })();
-
 }

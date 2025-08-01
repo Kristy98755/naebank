@@ -41,4 +41,53 @@ function parseQRCode(decodedText) {
     } else {
         console.log("Сигнатура qr.tulpar.kg10 не найдена или данных недостаточно."); 	//если программа наебнулась на любом из шагов, в консоль отладки поступит сообщение
     }
+
+    
+    // ==== Дополнительный парсинг EMVCo QR (O!Деньги, Simbank, Mbank) ====
+    (function() {
+        const emvFields = {};
+        let p = 0;
+        while (p < decodedText.length - 4) {
+            const t = decodedText.slice(p, p + 2);
+            const l = parseInt(decodedText.slice(p + 2, p + 4), 10);
+            const v = decodedText.slice(p + 4, p + 4 + l);
+            emvFields[t] = v;
+            p += 4 + l;
+        }
+
+        const emvResult = {
+            реквизит: null,
+            услуга: "перевод по QR",
+            поставщик: null,
+            получатель: null,
+            комментарий: null,
+            сумма: null
+        };
+
+        const merchantTags = Object.keys(emvFields).filter(t => +t >= 26 && +t <= 51);
+        for (const t of merchantTags) {
+            const sub = {};
+            let q = 0;
+            const val = emvFields[t];
+            while (q < val.length - 4) {
+                const st = val.slice(q, q + 2);
+                const sl = parseInt(val.slice(q + 2, q + 4), 10);
+                const sv = val.slice(q + 4, q + 4 + sl);
+                sub[st] = sv;
+                q += 4 + sl;
+            }
+            if (sub["00"]) emvResult.поставщик = sub["00"];
+            if (sub["11"]) emvResult.реквизит = sub["11"];
+            if (sub["12"]) emvResult.получатель = sub["12"];
+            if (sub["26"]) emvResult.комментарий = sub["26"];
+        }
+
+        if (emvFields["59"] && !emvResult.получатель) emvResult.получатель = emvFields["59"];
+        if (emvFields["40"] && !emvResult.получатель) emvResult.получатель = emvFields["40"];
+        if (emvFields["54"]) emvResult.сумма = parseFloat(emvFields["54"]) / 100;
+        if (!emvResult.комментарий) emvResult.комментарий = emvResult.получатель;
+
+        console.log("Парсинг EMVCo QR:", emvResult);
+    })();
+
 }

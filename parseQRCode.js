@@ -1,5 +1,5 @@
 function parseQRCode(decodedText) {
-    decodedText = decodeURIComponent(decodedText);  //берем результат сканирования
+        decodedText = decodeURIComponent(decodedText.split("#")[1] || "");  //берем результат сканирования
     console.log("Декодированный текст QR: ", decodedText);  //репорт текста в консоль (для компьютнрной отладки)
 
     const keyword = "qr.tulpar.kg10";			//переменная, в которой хранится шаблон для определения типа платежа

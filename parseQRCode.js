@@ -37,6 +37,8 @@ function parseQRCode(decodedText) {
 
         const el = document.getElementById("auto");   //прописываем код транспорта в чек
         if (el) el.textContent = transportNumber + "/" + transportNumber; //если мы его туда прописали, то дублируем его через слэш (чтоб по канону смотрелось)
+		showScreen('screen2');
+	return;
 
     } else {
         console.log("Сигнатура qr.tulpar.kg10 не найдена или данных недостаточно."); 	//если программа наебнулась на любом из шагов, в консоль отладки поступит сообщение
@@ -98,6 +100,7 @@ function parseQRCode(decodedText) {
     // Вывод
     if (codeProvider === "Undefined") {
         console.log("Неизвестный формат");
+		showScreen('parseError');
     } else {
         let usluga_1;
         if (codeProvider === "О!Деньги" || codeProvider === "Simbank") {
@@ -118,3 +121,4 @@ function parseQRCode(decodedText) {
                     postavshik_2, rekvizit_2, comment_2, poluchatel_2, ID_2);
     }
 }
+

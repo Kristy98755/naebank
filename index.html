@@ -31,7 +31,7 @@
 
     <!-- Экран 2: результат -->
     <div id="screen2" class="screen">
-		<img src="history.jpg" alt="Фон истории" class="screen2-bg">
+		<img src="history.jpg" class="screen2-bg">
 	    <div class="history-box">
 			<img src="success.png" alt="Успешно" class="success-image"> <!--фон с зеленой галочкой-->
 			<div class="dotted-line">	<!--пунктирный разделитель-->
@@ -63,6 +63,14 @@
 			<p class="final">Оплата услуг. Получатель: Оплата по QR Госуслуги. <span id=auto></span>/TULPAR/17.00 <span id=hexid></span> Сумма 17.00 KGS</p>	
 		</div>
     </div>
+	<!-- Экран вывода несовмесимого QR -->
+	<div id="parseError" class="screen">
+		<img src="history.jpg" class="error-bg">
+		<div class="errMsgBox">
+			QR не распознан
+			<div class="ErrBtn" id="close">Закрыть</div>
+		</div>
+	</div>
 
 </body>
 </html>

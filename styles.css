@@ -8,6 +8,7 @@ body {
     height: 100vh;
 	font-size: 94%;
 	font-weight: 520;
+	user-select: none;
 }
 
 /* Экраны */
@@ -90,6 +91,54 @@ body {
     align-items: center;
     flex-direction: column;
 }
+#parseError {
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#error-bg, .error-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+    z-index: 0;
+}
+
+.errMsgBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание по левому краю */
+    text-align: left;
+
+    background-color: #131313;
+	color:#606060;	
+    border-radius: 20px;
+    height: 100px;
+    width: 250px;
+    box-sizing: border-box;
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.ErrBtn {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+
+    font-size: 14px;
+    color: #088840;
+	z-index:3;
+}
+
 
 .history-box {
     display: flex;
@@ -174,3 +223,6 @@ body {
 	color: #606060;
 	padding: 0 20px;
 }
+
+
+

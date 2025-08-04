@@ -42,71 +42,79 @@ function parseQRCode(decodedText) {
         console.log("Сигнатура qr.tulpar.kg10 не найдена или данных недостаточно."); 	//если программа наебнулась на любом из шагов, в консоль отладки поступит сообщение
     }
 
-    
-     (function () {
-        const emvFields = {};
-        let p = 0;
 
-        // Первый уровень TLV-парсинга
-        while (p <= decodedText.length - 4) {
-            const tag = decodedText.slice(p, p + 2);
-            const len = parseInt(decodedText.slice(p + 2, p + 4), 10);
-            const val = decodedText.slice(p + 4, p + 4 + len);
-            emvFields[tag] = val;
-            p += 4 + len;
-        }
+// банковская параша
 
-        const emvResult = {
-            реквизит: null,
-            услуга: "перевод по QR",
-            поставщик: null,
-            получатель: null,
-            комментарий: null,
-            сумма: null
-        };
+    // Шаблоны банков
+    const banks = {
+        "p2p.dengi.kg": "О!Деньги",
+        "qr.dcb.kg": "Simbank",
+        "c2c.mbank.kg": "MBank"
+    };
 
-        // Парсим подструктуру в тегах от 26 до 51
-        for (const tag of Object.keys(emvFields)) {
-            const tagNum = parseInt(tag, 10);
-            if (tagNum < 26 || tagNum > 51) continue;
+    function parseTLV(data, startIndex) {
+        let rekvizit = "";
+        let chelovek = "";
+        let identifikatorTranzaksii = "";
 
-            const subfields = {};
-            let q = 0;
-            const val = emvFields[tag];
+        let index = startIndex;
+        while (index < data.length) {
+            let dataType = data.slice(index, index + 2);
+            if (!/^\d{2}$/.test(dataType)) break;
 
-            // Второй уровень TLV-парсинга
-            while (q <= val.length - 4) {
-                const subTag = val.slice(q, q + 2);
-                const subLen = parseInt(val.slice(q + 2, q + 4), 10);
-                const subVal = val.slice(q + 4, q + 4 + subLen);
-                subfields[subTag] = subVal;
-                q += 4 + subLen;
+            let dataLen = parseInt(data.slice(index + 2, index + 4));
+            if (isNaN(dataLen)) break;
+
+            let dataValue = data.slice(index + 4, index + 4 + dataLen);
+
+            if (dataType === "11") {
+                identifikatorTranzaksii = dataValue;
+            } else if (dataType === "10") {
+                rekvizit = dataValue;
+            } else if (dataType === "34") {
+                chelovek = dataValue;
             }
 
-            if (subfields["00"]) emvResult.поставщик = subfields["00"];
-            if (subfields["11"]) emvResult.реквизит = subfields["11"];
-            if (subfields["12"]) emvResult.получатель = subfields["12"];
-            if (subfields["26"]) emvResult.комментарий = subfields["26"];
+            index += 4 + dataLen;
         }
 
-        // Альтернативные источники для получателя
-        if (!emvResult.получатель) {
-            emvResult.получатель = emvFields["59"] || emvFields["40"] || null;
+        return { rekvizit, chelovek, identifikatorTranzaksii };
+    }
+
+    // Определение банка и парсинг
+    let codeProvider = "Undefined";
+    let rekvizit = "", chelovek = "", identifikatorTranzaksii = "", domain = "";
+
+    for (let key in banks) {
+        if (decodedText.includes(key)) {
+            codeProvider = banks[key];
+            domain = key;
+            let startIndex = decodedText.indexOf(key) + key.length;
+            ({ rekvizit, chelovek, identifikatorTranzaksii } = parseTLV(decodedText, startIndex));
+            break;
+        }
+    }
+
+    // Вывод
+    if (codeProvider === "Undefined") {
+        console.log("Неизвестный формат");
+    } else {
+        let usluga_1;
+        if (codeProvider === "О!Деньги" || codeProvider === "Simbank") {
+            usluga_1 = `${codeProvider} - ${chelovek}`;
+        } else {
+            usluga_1 = chelovek;
         }
 
-        // Сумма — строго по тегу 54, если есть
-        if ("54" in emvFields) {
-            const sumRaw = emvFields["54"];
-            if (/^\d+(\.\d+)?$/.test(sumRaw)) {
-                emvResult.сумма = parseFloat(sumRaw);
-            }
-        }
+        let rekvizit_1 = rekvizit;
+        let usluga_2 = "Перевод по QR";
+        let postavshik_2 = domain;
+        let rekvizit_2 = chelovek;
+        let comment_2 = chelovek;
+        let poluchatel_2 = chelovek;
+        let ID_2 = identifikatorTranzaksii;
 
-        // Если комментарий не найден — подставим имя получателя
-        if (!emvResult.комментарий) {
-            emvResult.комментарий = emvResult.получатель;
-        }
-
-        console.log("Парсинг EMVCo QR:", emvResult);
-    })();
+        console.log(codeProvider, rekvizit_1, usluga_1, usluga_2,
+                    postavshik_2, rekvizit_2, comment_2, poluchatel_2, ID_2);
+    }
 }

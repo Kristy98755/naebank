@@ -60,13 +60,26 @@ body {
     object-fit: cover;
 }
 
-#screen2 {
+/* Общий контейнер */
+#TULPARsuccess,
+#odengi,
+#simbank,
+#mbank {
     background-color: black;
     position: relative;
     overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-#screen2 .screen2-bg {
+/* Фон */
+#TULPARsuccess .TULPARsuccess-bg,
+#odengi .TULPARsuccess-bg,
+#simbank .TULPARsuccess-bg,
+#mbank .TULPARsuccess-bg {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -77,20 +90,15 @@ body {
     z-index: 0;
 }
 
-#screen2 > *:not(.screen2-bg) {
+/* Контент поверх фона */
+#TULPARsuccess > *:not(.TULPARsuccess-bg),
+#odengi > *:not(.TULPARsuccess-bg),
+#simbank > *:not(.TULPARsuccess-bg),
+#mbank > *:not(.TULPARsuccess-bg) {
     position: relative;
     z-index: 1;
 }
-#screen2 {
-    background-color: black;
-    position: relative;
-    overflow: hidden;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 #parseError {
     background-color: black;
     position: relative;
@@ -115,24 +123,24 @@ body {
 .errMsgBox {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравнивание по левому краю */
+    align-items: flex-start;
     text-align: left;
-
     background-color: #131313;
-	color:#606060;	
+    color: #606060;
     border-radius: 20px;
-    height: 100px;
-    width: 250px;
+    height: 115px;
+    width: 280px;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 15px 20px 20px 25px;
     position: relative;
     z-index: 2;
 }
 
+
 .ErrBtn {
     position: absolute;
-    bottom: 10px;
-    right: 15px;
+    bottom: 15px;
+    right: 20px;
 
     font-size: 14px;
     color: #088840;
@@ -217,6 +225,17 @@ body {
   text-align: right;   /* Правый столбец - по правому краю */
 }
 
+.table-container {
+  max-height: 40vh;
+  overflow-y: auto;
+  width: 100%;
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.table-container::-webkit-scrollbar {
+  display: none;
+}
 
 .final {
 	text-align: left;

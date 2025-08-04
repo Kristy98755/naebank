@@ -37,7 +37,7 @@ function parseQRCode(decodedText) {
 
         const el = document.getElementById("auto");   //прописываем код транспорта в чек
         if (el) el.textContent = transportNumber + "/" + transportNumber; //если мы его туда прописали, то дублируем его через слэш (чтоб по канону смотрелось)
-		showScreen('screen2');
+		showScreen('TULPARsuccess');
 	return;
 
     } else {
@@ -116,9 +116,25 @@ function parseQRCode(decodedText) {
         let comment_2 = chelovek;
         let poluchatel_2 = chelovek;
         let ID_2 = identifikatorTranzaksii;
+		
 
         console.log(codeProvider, rekvizit_1, usluga_1, usluga_2,
                     postavshik_2, rekvizit_2, comment_2, poluchatel_2, ID_2);
+					
+		if (codeProvider === 'О!Деньги') {
+			console.log("Загружаю экран odengi")
+			showScreen("odengi")
+		}
+		
+		if (codeProvider === 'Simbank') {
+			console.log("Загружаю экран simbank")
+			showScreen("simbank")
+		}
+		
+		if (codeProvider === 'MBank') {
+			console.log("Загружаю экран mbank")
+			showScreen("mbank")
+		}
     }
 }
 

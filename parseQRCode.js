@@ -79,9 +79,9 @@ function parseQRCode(decodedText) {
 
             index += 4 + dataLen;
         }
-
-        return { rekvizit, chelovek, identifikatorTranzaksii };
 		console.log("rekvizit:", rekvizit, "/ chelovek:", chelovek, "/ ID:", identifikatorTranzaksii)
+        return { rekvizit, chelovek, identifikatorTranzaksii };
+		
     }
 
     // Определение банка и парсинг

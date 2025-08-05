@@ -118,17 +118,32 @@ function parseQRCode(decodedText) {
         let ID_2 = identifikatorTranzaksii;
 		
 
-        console.log(codeProvider, rekvizit_1, usluga_1, usluga_2,
-                    postavshik_2, rekvizit_2, comment_2, poluchatel_2, ID_2);
-					
-        document.querySelectorAll(".rekv_1").forEach(el => el.textContent = rekvizit_1);
-        document.querySelectorAll(".usl_1").forEach(el => el.textContent = usluga_1);
-        document.querySelectorAll(".amount").forEach(el => el.textContent = "1");
-        document.querySelectorAll(".amountAgain").forEach(el => el.textContent = "1");
-        document.querySelectorAll(".postavshik_2").forEach(el => el.textContent = postavshik_2);
-        document.querySelectorAll(".rekvizit_2").forEach(el => el.textContent = rekvizit_2);
-        document.querySelectorAll(".poluchatel_2").forEach(el => el.textContent = poluchatel_2);
-        document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
+		console.log("comment_2:", comment_2);
+		document.querySelectorAll(".comment_2").forEach(el => el.textContent = comment_2);
+
+		console.log("rekvizit_1:", rekvizit_1);
+		document.querySelectorAll(".rekv_1").forEach(el => el.textContent = rekvizit_1);
+
+		console.log("usluga_1:", usluga_1);
+		document.querySelectorAll(".usl_1").forEach(el => el.textContent = usluga_1);
+
+		console.log("amount: Сумма не указана");
+		document.querySelectorAll(".amount").forEach(el => el.textContent = "Сумма не указана");
+
+		console.log("amountAgain: Сумма не указана");
+		document.querySelectorAll(".amountAgain").forEach(el => el.textContent = "Сумма не указана");
+
+		console.log("postavshik_2:", postavshik_2);
+		document.querySelectorAll(".postavshik_2").forEach(el => el.textContent = postavshik_2);
+
+		console.log("rekvizit_2:", rekvizit_2);
+		document.querySelectorAll(".rekvizit_2").forEach(el => el.textContent = rekvizit_2);
+
+		console.log("poluchatel_2:", poluchatel_2);
+		document.querySelectorAll(".poluchatel_2").forEach(el => el.textContent = poluchatel_2);
+
+		console.log("ID_2:", ID_2);
+		document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
 		
 		if (codeProvider === 'О!Деньги') {
 			console.log("Загружаю экран odengi")

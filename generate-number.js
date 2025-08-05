@@ -15,8 +15,7 @@ function generateBillNumber() {
   for (let i = 0; i < 13; i++) {
     str += Math.floor(Math.random() * 10);
   }
-  const el = document.getElementById("billnum");  //ищем в файле html первую попавшуюся вещь которой дали ID "billnum"
-  if (el) el.textContent = str;					  //если таковая есть то присвоим ей сгенерированное значение
+  document.querySelectorAll('.billnum').forEach(el => el.textContent = str); //подставим везде где class="billnum"
 }
 
 // Генерация текущей даты и времени в формате "дд.мм.гггг, чч:мм"
@@ -27,8 +26,8 @@ function updateDateTime() {
   const year = now.getFullYear();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
-  const el = document.getElementById("datetime");
-  if (el) el.textContent = `${day}.${month}.${year}, ${hours}:${minutes}`;
+  const dateText = `${day}.${month}.${year}, ${hours}:${minutes}`;
+  document.querySelectorAll('.datetime').forEach(el => el.textContent = dateText);
 }
 
 // Генерация номера квитанции: "P" + 13 случайных цифр
@@ -37,8 +36,7 @@ function generateReceiptNumber() {
   for (let i = 0; i < 11; i++) {
     str += Math.floor(Math.random() * 10);
   }
-  const el = document.getElementById("receipt");
-  if (el) el.textContent = str;
+  document.querySelectorAll('.receipt').forEach(el => el.textContent = str);
 }
 
 // Генерация шестнадцатеричной строки: 8-4-4-4-12
@@ -57,6 +55,5 @@ function generateHexId() {
   }
 
   const hexString = `${firstHex}-${randomHex(4)}-${randomHex(4)}-${randomHex(4)}-${randomHex(12)}`;
-  const el = document.getElementById("hexid");
-  if (el) el.textContent = hexString;
+  document.querySelectorAll('.hexid').forEach(el => el.textContent = hexString);
 }

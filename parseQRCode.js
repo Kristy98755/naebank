@@ -73,9 +73,11 @@ function parseQRCode(decodedText) {
                 identifikatorTranzaksii = dataValue;
             } else if (dataType === "10") {
                 rekvizit = dataValue;
-            } else if (dataType === "34" || dataType === "59") {
+            } else if (dataType === "34") {
                 chelovek = dataValue;
-            }
+            } else if (dataType === "59" && chelovek === "") {
+				chelovek = dataValue;
+			}
 
             index += 4 + dataLen;
         }

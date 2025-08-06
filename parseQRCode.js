@@ -149,19 +149,29 @@ function parseQRCode(decodedText) {
         document.querySelectorAll(".poluchatel_2").forEach(el => el.textContent = poluchatel_2);
         document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
 		
-		if (codeProvider === "O!Den'gi") {
-			console.log("Загружаю экран odengi");
-			showScreen("odengi");
-		}
+		showScreen('amountscreen');
 		
-		if (codeProvider === 'Simbank') {
-			console.log("Загружаю экран simbank");
-			showScreen("simbank");
-		}
+		const payBtn = document.getElementById('pay-button');
+		if (payBtn) {
+			payBtn.addEventListener('click', () => {
+				
 		
-		if (codeProvider === 'MBank') {
-			console.log("Загружаю экран mbank");
-			showScreen("mbank");
+			if (codeProvider === "O!Den'gi") {
+				console.log("Загружаю экран odengi");
+				showScreen("odengi");
+			}
+			
+			if (codeProvider === 'Simbank') {
+				console.log("Загружаю экран simbank");
+				showScreen("simbank");
+			}
+			
+			if (codeProvider === 'MBank') {
+				console.log("Загружаю экран mbank");
+				showScreen("mbank");
+			}
+			
+			});
 		}
     }
 }

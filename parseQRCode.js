@@ -149,7 +149,7 @@ function parseQRCode(decodedText) {
         document.querySelectorAll(".poluchatel_2").forEach(el => el.textContent = poluchatel_2);
         document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
 		
-		if (codeProvider === 'O!Den'gi') {
+		if (codeProvider === "O!Den'gi") {
 			console.log("Загружаю экран odengi")
 			showScreen("odengi")
 		}

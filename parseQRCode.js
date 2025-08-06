@@ -1,3 +1,11 @@
+function toTitleCase(text) {
+    return text
+        .toLowerCase() // сначала всё делаем строчными
+        .split(' ')    // разбиваем по пробелам
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // первую букву — в верхний регистр
+        .join(' ');    // собираем обратно в строку
+}
+
 function parseQRCode(decodedText) {
         decodedText = decodeURIComponent(decodedText.split("#")[1] || "");  //берем результат сканирования
     console.log("Декодированный текст QR: ", decodedText);  //репорт текста в консоль (для компьютнрной отладки)
@@ -49,7 +57,7 @@ function parseQRCode(decodedText) {
 
     // Шаблоны банков
     const banks = {
-        "p2p.dengi.kg": "О!Деньги",
+        "p2p.dengi.kg": "O!Den'gi",
         "qr.dcb.kg": "Simbank",
         "c2c.mbank.kg": "MBank"
     };
@@ -105,7 +113,7 @@ function parseQRCode(decodedText) {
 		showScreen('parseError');
     } else {
         let usluga_1;
-        if (codeProvider === "О!Деньги") {
+        if (codeProvider === "O!Den'gi") {
             usluga_1 = `${codeProvider} - ${chelovek}`;
         } else {
 			if (chelovek === "") {
@@ -126,6 +134,10 @@ function parseQRCode(decodedText) {
 			chelovek = poluchatel_2 = usluga_1 = "Simbank-по номеру телефона";
 			rekvizit_2 = rekvizit;
 		}
+		
+		if (codeProvider === "MBank") {
+			usl_1 = toTitleCase(usl_1);
+		}
 
         document.querySelectorAll(".comment_2").forEach(el => el.textContent = comment_2);
         document.querySelectorAll(".rekv_1").forEach(el => el.textContent = rekvizit_1);
@@ -137,7 +149,7 @@ function parseQRCode(decodedText) {
         document.querySelectorAll(".poluchatel_2").forEach(el => el.textContent = poluchatel_2);
         document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
 		
-		if (codeProvider === 'О!Деньги') {
+		if (codeProvider === 'O!Den'gi') {
 			console.log("Загружаю экран odengi")
 			showScreen("odengi")
 		}

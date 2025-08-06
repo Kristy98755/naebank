@@ -208,8 +208,8 @@
 	  </div>
 
 	  <div class="input-box">
-		<input type="number" class="amount-input" id="amount-input" placeholder="0 с">
-		<div class="commission">Комиссия 0,00 с</div>
+		<input type="number" class="amount-input" id="amount-input" placeholder="0 с" step="0.01" min="0" max="9999999999.99" inputmode="decimal">
+		<div class="commission">Комиссия 0,00 <u>с</u></div>
 	  </div>
 
 	  <div class="card-box">
@@ -223,6 +223,31 @@
 	  </div>
 
 	  <div class="pay-button" id="payBtn">Оплатить</div>
+		
+		<script>
+			const input = document.getElementById('amount-input');
+			const payBtn = document.getElementById('payBtn');
+
+			input.addEventListener('input', () => {
+			let value = input.value.replace(',', '.'); // Заменить запятую на точку
+
+
+			
+			input.value = formatted;
+
+			// Обновляем кнопку
+			if (formatted) {
+			  const floatValue = parseFloat(formatted);
+			  if (!isNaN(floatValue)) {
+				const displayValue = floatValue.toFixed(2).replace('.', ',');
+				payBtn.textContent = `Оплатить ${displayValue} с`;
+				return;
+			  }
+			}
+			payBtn.textContent = 'Оплатить';
+			});
+		</script>
+
 
 
 	</div>

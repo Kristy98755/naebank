@@ -224,29 +224,74 @@
 
 	  <div class="pay-button" id="payBtn">Оплатить</div>
 		
-		<script>
-			const input = document.getElementById('amount-input');
-			const payBtn = document.getElementById('payBtn');
+	<script>
+	  const input = document.getElementById('amount-input');
+	  const payBtn = document.getElementById('payBtn');
 
-			input.addEventListener('input', () => {
-			let value = input.value.replace(',', '.'); // Заменить запятую на точку
+	  input.addEventListener('input', (e) => {
+		const cursorPos = input.selectionStart;
 
+		let rawValue = input.value;
+		let value = rawValue.replace(',', '.'); // Разрешаем и запятую и точку
 
-			
-			input.value = formatted;
+		// Удаляем все символы кроме цифр и точки
+		value = value.replace(/[^0-9.]/g, '');
 
-			// Обновляем кнопку
-			if (formatted) {
-			  const floatValue = parseFloat(formatted);
-			  if (!isNaN(floatValue)) {
-				const displayValue = floatValue.toFixed(2).replace('.', ',');
-				payBtn.textContent = `Оплатить ${displayValue} с`;
-				return;
-			  }
-			}
-			payBtn.textContent = 'Оплатить';
-			});
-		</script>
+		// Оставляем только одну точку
+		const parts = value.split('.');
+		if (parts.length > 2) {
+		  value = parts[0] + '.' + parts[1]; // отбрасываем лишние точки
+		}
+
+		let integerPart = parts[0] || '';
+		let decimalPart = parts[1] || '';
+
+		// Ограничения
+		if (integerPart.length > 10) {
+		  integerPart = integerPart.slice(0, 10);
+		}
+		if (decimalPart.length > 2) {
+		  decimalPart = decimalPart.slice(0, 2);
+		}
+
+		// Собрать финальное значение
+		let finalValue = integerPart;
+		if (value.includes('.')) {
+		  finalValue += '.' + decimalPart;
+		}
+
+		// Обновляем input без сброса курсора
+		const prevLength = input.value.length;
+		input.value = finalValue;
+		const newLength = input.value.length;
+		const diff = newLength - prevLength;
+		input.setSelectionRange(cursorPos + diff, cursorPos + diff);
+
+		// Обновляем кнопку
+		if (finalValue) {
+		  const floatValue = parseFloat(finalValue);
+		  if (!isNaN(floatValue)) {
+			const displayValue = floatValue.toFixed(2).replace('.', ',');
+			payBtn.textContent = `Оплатить ${displayValue} с`;
+			return;
+		  }
+		}
+
+		payBtn.textContent = 'Оплатить';
+	  });
+
+	  // Заменяем запятую на точку при вводе
+	  input.addEventListener('keydown', (e) => {
+		if (e.key === ',') {
+		  e.preventDefault();
+		  const cursorPos = input.selectionStart;
+		  const currentValue = input.value;
+		  input.value = currentValue.slice(0, cursorPos) + '.' + currentValue.slice(cursorPos);
+		  input.setSelectionRange(cursorPos + 1, cursorPos + 1);
+		}
+	  });
+	</script>
+
 
 
 

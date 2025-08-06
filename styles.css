@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-	font-size: 13;
+	font-size: 15px;
 	font-weight: 520;
 	user-select: none;
 }

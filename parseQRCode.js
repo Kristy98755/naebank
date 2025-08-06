@@ -136,7 +136,7 @@ function parseQRCode(decodedText) {
 		}
 		
 		if (codeProvider === "MBank") {
-			usl_1 = toTitleCase(usl_1);
+			usluga_1 = toTitleCase(usluga_1);
 		}
 
         document.querySelectorAll(".comment_2").forEach(el => el.textContent = comment_2);

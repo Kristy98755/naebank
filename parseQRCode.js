@@ -150,18 +150,18 @@ function parseQRCode(decodedText) {
         document.querySelectorAll(".ID_2").forEach(el => el.textContent = ID_2);
 		
 		if (codeProvider === "O!Den'gi") {
-			console.log("Загружаю экран odengi")
-			showScreen("odengi")
+			console.log("Загружаю экран odengi");
+			showScreen("odengi");
 		}
 		
 		if (codeProvider === 'Simbank') {
-			console.log("Загружаю экран simbank")
-			showScreen("simbank")
+			console.log("Загружаю экран simbank");
+			showScreen("simbank");
 		}
 		
 		if (codeProvider === 'MBank') {
-			console.log("Загружаю экран mbank")
-			showScreen("mbank")
+			console.log("Загружаю экран mbank");
+			showScreen("mbank");
 		}
     }
 }

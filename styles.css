@@ -264,7 +264,7 @@ body {
 
 .header {
   font-size: 20px;
-  margin: 0 20px;
+  margin: 30px 5px;
 }
 .label {
   font-size: 12px;
@@ -309,7 +309,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
 }
 .card-left {
   display: flex;
@@ -327,15 +327,15 @@ body {
   font-weight: bold;
 }
 .card-number {
-  font-size: 16px;
   letter-spacing: 1px;
 }
 .card-right {
-  background-color: #fcbf49;
   border-radius: 6px;
   padding: 4px 8px;
   color: black;
   font-weight: bold;
+  width: 64px;
+  height: 40px;
 }
 .pay-button {
   width: 100%;
@@ -348,4 +348,8 @@ body {
   border-radius: 12px;
   text-align: center;
   box-sizing: border-box;
+}
+
+.amount-input {
+	font-family: inherit;
 }

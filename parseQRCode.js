@@ -151,10 +151,16 @@ function parseQRCode(decodedText) {
 		
 		showScreen('amountscreen');
 		
-		const payBtn = document.getElementById('pay-button');
+		const payBtn = document.getElementById('payBtn');
 		if (payBtn) {
 			payBtn.addEventListener('click', () => {
-				
+			
+			const input = document.querySelector('.amount-input');
+			const amount = input.value.trim();
+			
+			document.querySelectorAll(".amount").forEach(el => el.textContent = amount);
+			document.querySelectorAll(".amountAgain").forEach(el => el.textContent = amount);
+
 		
 			if (codeProvider === "O!Den'gi") {
 				console.log("Загружаю экран odengi");

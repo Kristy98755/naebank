@@ -264,7 +264,7 @@ body {
 
 .header {
   font-size: 20px;
-  margin-bottom: 20px;
+  margin: 0 20px;
 }
 .label {
   font-size: 12px;
@@ -346,5 +346,6 @@ body {
   padding: 14px;
   border: none;
   border-radius: 12px;
-  cursor: default;
+  text-align: center;
+  box-sizing: border-box;
 }

@@ -242,6 +242,8 @@ body {
 	text-align: left;
 	color: #606060;
 	padding: 0 20px;
+	width: 100%;
+	
 }
 
 
@@ -352,3 +354,115 @@ body {
 	font-family: inherit;
 	font-weight: 700;
 }
+
+
+
+/* ГАЛОЧКА */
+
+
+.clock-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: 20px 0 0 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.clock{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbb;
+    border: 10px solid #088840;
+    border-radius: 50%;
+}
+
+
+.clock:before{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #088840;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.clock .hour,
+.clock .min{
+    position: absolute;
+	
+}
+
+.clock .hour, .hr{
+    width: 22px;
+    height: 22px;
+	
+}
+.clock .min, .mn{
+    width: 44px;
+    height: 44px;
+}
+
+
+.hr, .mn{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border-radius: 50%;
+	
+}
+
+.hr{
+	
+    transform: rotateZ(-55deg);
+}
+.mn{
+	
+    transform: rotateZ(45deg);
+}
+.hr:before{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 11px;
+    z-index: 10;
+	background-color: #088840;
+    border-radius: 3px;
+	
+}
+.mn:before{
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 22px;
+	background-color: #088840;
+    border-radius: 3px;
+    z-index: 11;
+}
+
+    .success-text {
+      color: #088840;
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .tickAmount {
+      font-size: 24px;
+      margin-top: 10px;
+	  color:#a1a1a1;
+	  font-weight: 700;
+
+    }
+
+
+    .description {
+      font-size: 16px;
+      color: #606060;
+      margin: 8px 0;
+    }

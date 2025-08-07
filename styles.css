@@ -390,11 +390,14 @@ body {
     background-color: #088840;
     border-radius: 50%;
     z-index: 999;
+	transform: translate(-3px, 8px); /*срочно убрать при первой возможности*/
 }
 
 .clock .hour,
 .clock .min{
     position: absolute;
+		transform: translate(-3px, 8px); /*срочно убрать при первой возможности*/
+
 	
 }
 

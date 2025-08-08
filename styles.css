@@ -1,6 +1,33 @@
 /* Общие стили */
+@font-face {
+	font-family: "Nunito";
+	font-weight: 400;
+	src: url('Nunito-regular.ttf')
+}@font-face {
+	font-family: "Nunito";
+	font-weight: 500;
+	src: url('Nunito-medium.ttf')
+}@font-face {
+	font-family: "Nunito";
+	font-weight: 600;
+	src: url('Nunito-SemiBold.ttf')
+}@font-face {
+	font-family: "Nunito";
+	font-weight: 700;
+	src: url('Nunito-bold.ttf')
+}@font-face {
+	font-family: "Nunito";
+	font-weight: 800;
+	src: url('Nunito-ExtraBold.ttf')
+}@font-face {
+	font-family: "Nunito";
+	font-weight: 900;
+	src: url('Nunito-Black.ttf')
+}
+
+
 body {
-	font-family: "Montserrat", sans-serif;
+	font-family: "Nunito", sans-serif;
 	margin: 0;
     padding: 0;
     display: flex;
@@ -11,6 +38,7 @@ body {
 	user-select: none;
 	background-color:#000;
 }
+
 
 /* Экраны */
 .screen {
